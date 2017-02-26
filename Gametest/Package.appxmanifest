@@ -5,14 +5,14 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   IgnorableNamespaces="uap mp">
 
-  <Identity Name="c6aadd01-efa8-4060-b05a-f6e470657e7c"
+  <Identity Name="362f70c4-7346-4252-97d1-7bd47cc1075b"
             Publisher="CN=Dave"
             Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="c6aadd01-efa8-4060-b05a-f6e470657e7c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="362f70c4-7346-4252-97d1-7bd47cc1075b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>GameTesting</DisplayName>
+    <DisplayName>Gametest</DisplayName>
     <PublisherDisplayName>Dave</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -27,12 +27,12 @@
   <Applications>
     <Application Id="vstest.executionengine.universal.App" 
         Executable="$targetnametoken$.exe"
-        EntryPoint="GameTesting.App">
+        EntryPoint="Gametest.App">
       <uap:VisualElements
-        DisplayName="GameTesting"
+        DisplayName="Gametest"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="GameTesting"
+        Description="Gametest"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
