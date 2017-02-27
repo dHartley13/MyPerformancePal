@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="Gametest.App"
+    x:Class="GameUnitTest.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Gametest"
+    xmlns:local="using:GameUnitTest"
     RequestedTheme="Light">
 
 </Application>

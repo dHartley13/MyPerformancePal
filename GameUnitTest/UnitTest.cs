@@ -1,8 +1,7 @@
 ﻿using System;
-using Moq;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace Gametest
+namespace GameUnitTest
 {
     [TestClass]
     public class UnitTest1
