@@ -12,12 +12,12 @@ namespace MyPerformacePal
         public List<string> RetrieveCategories()
         {
             List<string> items = new List<string>();
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
             using (SqlConnection dbconnection = new SqlConnection(connectionString))
             {
                 try
                 {
-                    string sqlCommand = "Select [Text] from master.dbo.actionDropDownLookup";
+                    string sqlCommand = "Select [Text] from dbo.actionDropDownLookup";
                     SqlCommand cmd = new SqlCommand(sqlCommand, dbconnection);
                     dbconnection.Open();
 
@@ -33,7 +33,7 @@ namespace MyPerformacePal
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    return items; //this doesn't seem right
+                    return items; 
                 }
                 finally
                 {

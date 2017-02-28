@@ -19,7 +19,7 @@ namespace MyPerformacePal
         //Public functions
         public int CreateGame()
         {
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
             using (var dbConnection = new SqlConnection(connectionString))
             {
                 dbConnection.Open();
@@ -54,7 +54,7 @@ namespace MyPerformacePal
         public void SaveAction(int actionType, string chosenAction, int gameID)
         {
 
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
             using (var dbConnection = new SqlConnection(connectionString))
             {
                 dbConnection.Open();
