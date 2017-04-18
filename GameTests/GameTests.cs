@@ -6,6 +6,7 @@ using System.Text;
 using MyPerformacePal;
 using Moq;
 using Xunit;
+using Xunit.Runner.TdNet;
 using System.Threading.Tasks;
 
 namespace GameTests
