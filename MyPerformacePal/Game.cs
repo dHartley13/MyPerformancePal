@@ -38,12 +38,16 @@ namespace MyPerformacePal
 
         public void RecordAction(int actionType, string chosenAction)
         {
-            
-            if (GameId == 0)
-                throw new InvalidOperationException("Cannot record an action as the game has not started");
 
-                    _db.SaveAction(actionType, chosenAction, GameId);
-                    RecordStats(actionType);
+            if (GameId == 0)
+            {
+                throw new InvalidOperationException("Cannot record an action as the game has not started");
+            }
+            else
+            {
+                _db.SaveAction(actionType, chosenAction, GameId);
+                RecordStats(actionType);
+            }
 
         }
 

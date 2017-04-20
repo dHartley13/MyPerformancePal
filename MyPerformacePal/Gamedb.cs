@@ -62,7 +62,7 @@ namespace MyPerformacePal
                 sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(new SqlParameter("@gameID", gameID));
                 sqlCommand.Parameters.Add(new SqlParameter("@ActionType", actionType));
-                sqlCommand.Parameters.Add(new SqlParameter("@Action", chosenAction));
+                sqlCommand.Parameters.Add(new SqlParameter("@chosenAction", chosenAction));
 
                 try
                 {

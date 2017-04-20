@@ -17,7 +17,7 @@ namespace MyPerformacePal
             {
                 try
                 {
-                    string sqlCommand = "Select [Text] from dbo.actionDropDownLookup";
+                    string sqlCommand = "Select [ActionText] from dbo.actionDropDownLookup";
                     SqlCommand cmd = new SqlCommand(sqlCommand, dbconnection);
                     dbconnection.Open();
 
@@ -25,7 +25,7 @@ namespace MyPerformacePal
                     {
                         while (cmboDataReader.Read())
                         {
-                            items.Add(cmboDataReader["Text"].ToString());
+                            items.Add(cmboDataReader["ActionText"].ToString());
                         }
                     }
                     return items;

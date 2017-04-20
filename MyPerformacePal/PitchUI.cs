@@ -79,14 +79,14 @@ namespace MyPerformacePal
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error when calling RecordAction :" + ex);
+                Console.WriteLine("Error when calling RecordAction:" + ex);
                 MessageBox.Show(ex.ToString());
             }
         }
 
         private void Img_Pitch_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
