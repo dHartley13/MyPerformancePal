@@ -14,11 +14,11 @@ namespace MyPerformacePal
     public partial class Pitch : Form
     {
         //Class Variables
-        private Rectangle Coordinates;
         public int actionType;
         public string chosenAction;
         private ComboBoxItemAccessLayer comboBoxItemAccessLayer;
         private Game _game;
+        private Rectangle Coordinates;
 
         //Consutructor
         public Pitch()
@@ -82,11 +82,6 @@ namespace MyPerformacePal
                 Console.WriteLine("Error when calling RecordAction:" + ex);
                 MessageBox.Show(ex.ToString());
             }
-        }
-
-        private void Img_Pitch_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

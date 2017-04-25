@@ -45,7 +45,7 @@ namespace GameTests
             game.RecordAction(1, "Retained");
 
             //Test
-            mockDB.Verify(m => m.SaveAction(123, "Retained", 1), Times.Once);
+            mockDB.Verify(m => m.SaveAction(1, "Retained", 123), Times.Once);
         }
 
         [Fact]

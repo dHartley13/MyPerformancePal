@@ -35,13 +35,14 @@ namespace MyPerformacePal
                 try
                 {
                     sqlCommand.ExecuteNonQuery();                                   //execute the query
-                    Console.WriteLine("Insert successfull");                        //post that its been successful
+                    Console.WriteLine("dbo.getNextGameID was successfull");         //post that its been successful
                     return (int)returnParam.Value;                                  //return the gameID from the SP                    
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Insert SP was not ran successfully" + ": " + ex.Message);
                     return -1;
+                    throw new InvalidOperationException("Couldn't start the game");
+                    //Console.WriteLine("dbo.getNextGameID was not ran successfully" + ": " + ex.Message); removed to use exception instead    
                 }
                 finally
                 {
@@ -67,11 +68,11 @@ namespace MyPerformacePal
                 try
                 {
                     sqlCommand.ExecuteNonQuery();                                   //execute the query
-                    Console.WriteLine("Insert successfull");                        //post that its been successful               
+                    Console.WriteLine("dbo.insertRawGameData Insert successfull");                        //post that its been successful               
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Insert SP was not ran successfully" + ": " + ex.Message);
+                    Console.WriteLine("dbo.insertRawGameData was not ran successfully" + ": " + ex.Message);
                 }
                 finally
                 {
