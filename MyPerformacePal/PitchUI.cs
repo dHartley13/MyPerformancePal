@@ -21,7 +21,6 @@ namespace MyPerformacePal
         private ComboBoxItemAccessLayer comboBoxItemAccessLayer;
         private Game _game;
         private fieldLocationFinder _fieldLocationFinder;
-        private Rectangle Coordinates;
 
         //Consutructor
         public Pitch()
@@ -38,18 +37,33 @@ namespace MyPerformacePal
             var categories = comboBoxItemAccessLayer.getCategories();
             cmbo_PresentActionChoices.DisplayMember = " ";      //remove autoselect value on combobox
             cmbo_PresentActionChoices.ValueMember = null;       //remove autoselect value on combobox
-            cmbo_PresentActionChoices.DataSource = categories;  
+            cmbo_PresentActionChoices.DataSource = categories;
+
+            //TODO - add select set piece combo box to UI
+            /*
+            var setPieces = comboBoxItemAccessLayer.getSetPieceTypes();
+            cmbo_PresentsetPieceTypes.DisplayMember = " ";      //remove autoselect value on combobox
+            cmbo_PresentsetPieceTypes.ValueMember = null;       //remove autoselect value on combobox
+            cmbo_PresentsetPieceTypes.DataSource = setPieces;
+            */
+
+
         }
 
         private void PitchUI_Load(object sender, EventArgs e)
         {
 
         }
-
+        
+        //TODO - remove the below
         public enum setPieceType
         {
             scrum = 1,
-            lineout = 2
+            lineout = 2, 
+            penalty_forGoal = 3,
+            penalty_toTouch = 4,
+            TwentyTwo_dropout = 5,
+            FreeKick = 6
         }
 
         //Private Functions
@@ -62,7 +76,7 @@ namespace MyPerformacePal
             coordinateX = e.X;
             coordinateY = e.Y;
 
-            _fieldLocationFinder.mouseDownLocationFinder(coordinateX, coordinateY);
+            _fieldLocationFinder.onMouseDownFindLocation(coordinateX, coordinateY);
 
             if (_fieldLocationFinder.fieldLocationResult == 1)
             {

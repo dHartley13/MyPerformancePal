@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="actionTypeSetter.cs" />
+    <Compile Include="fieldLocationFinder.cs" />
     <Compile Include="ComboBoxItemAccessLayer.cs" />
     <Compile Include="ComboboxItemGetter.cs" />
     <Compile Include="Game.cs" />

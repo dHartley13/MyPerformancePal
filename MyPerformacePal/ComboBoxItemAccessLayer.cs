@@ -19,5 +19,10 @@ namespace MyPerformacePal
         {
             return comboBoxItemGetter.RetrieveCategories();
         }
+
+        internal List<string> getSetPieceTypes()
+        {
+            return comboBoxItemGetter.RetrieveSetPieces(fieldLocationResult); //no idea why this isn't working
+        }
     }
 }

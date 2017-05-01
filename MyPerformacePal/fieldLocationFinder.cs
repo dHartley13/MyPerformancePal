@@ -9,28 +9,33 @@ namespace MyPerformacePal
     //Interface
     public interface IfieldLocationFinder
     {
-        int mouseDownLocationFinder(double coordinatesX, double coordinatesY);
+        int onMouseDownFindLocation(double coordinatesX, double coordinatesY);
     }
 
     class fieldLocationFinder
     {
         //Class Variables
-        public int fieldLocationResult; 
+        public int fieldLocationResult;
+        private ComboBoxItemGetter _ComboBoxItemGetter;
 
+        //Object Variables
 
+        
+
+        //TODO - unsure what to do with these - they are in the db
         public enum fieldLocation
         {
-            inFeild = 1,
+            inField = 1,
             touchline = 2,
             tryZone = 3
         }
 
-        public int mouseDownLocationFinder(double coordinatesX, double coordinatesY)
+        public void onMouseDownFindLocation(double coordinatesX, double coordinatesY)
         {
             //if coordinates are inside the 15m and 5m lines then scrum -- TODO use percentages of picturebox and not harcoded coordinates
             if (coordinatesY > 125 && coordinatesY < 420 && coordinatesX > 130 && coordinatesX < 790)
             {
-                fieldLocationResult = (int)fieldLocation.inFeild;
+                fieldLocationResult = (int)fieldLocation.inField;
             }
             else
             {
@@ -41,7 +46,9 @@ namespace MyPerformacePal
                 do something for try zone
             }
             */
-            return fieldLocationResult;
+
+            //call comboboxItemGetter class to populate combo box depending on what the location of the pitch is
+            _ComboBoxItemGetter.RetrieveSetPieces(fieldLocationResult);
         }
     }
             

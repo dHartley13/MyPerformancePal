@@ -41,8 +41,7 @@ namespace MyPerformacePal
                 catch (Exception ex)
                 {
                     return -1;
-                    throw new InvalidOperationException("Couldn't start the game");
-                    //Console.WriteLine("dbo.getNextGameID was not ran successfully" + ": " + ex.Message); removed to use exception instead    
+                    throw new InvalidOperationException("Couldn't start the game");   
                 }
                 finally
                 {
