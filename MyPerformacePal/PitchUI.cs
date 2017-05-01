@@ -16,8 +16,11 @@ namespace MyPerformacePal
         //Class Variables
         public int actionType;
         public string chosenAction;
+        public double coordinateX;
+        public double coordinateY;
         private ComboBoxItemAccessLayer comboBoxItemAccessLayer;
         private Game _game;
+        private fieldLocationFinder _fieldLocationFinder;
         private Rectangle Coordinates;
 
         //Consutructor
@@ -28,6 +31,8 @@ namespace MyPerformacePal
             //Set object Variables
             comboBoxItemAccessLayer = new ComboBoxItemAccessLayer();
             _game = new Game();
+            _fieldLocationFinder = new fieldLocationFinder();
+
 
             //Set ComboBox datasource
             var categories = comboBoxItemAccessLayer.getCategories();
@@ -53,14 +58,21 @@ namespace MyPerformacePal
             cmbo_PresentActionChoices.Visible = true;
             cmbo_PresentActionChoices.DroppedDown = true;
 
-            Coordinates.X = e.X;
-            Coordinates.Y = e.Y;
+            //set coordinates
+            coordinateX = e.X;
+            coordinateY = e.Y;
 
-            //if coordinates are inside the 15m and 5m lines then scrum -- TODO use percentages of picturebox and not harcoded coordinates
-            if (Coordinates.Y > 125 && Coordinates.Y < 420 && Coordinates.X > 130 && Coordinates.X < 790)
+            _fieldLocationFinder.mouseDownLocationFinder(coordinateX, coordinateY);
+
+            if (_fieldLocationFinder.fieldLocationResult == 1)
             {
                 actionType = (int)setPieceType.scrum;
             }
+            else if (_fieldLocationFinder.fieldLocationResult == 2)
+            {
+                actionType = (int)setPieceType.lineout;
+            }
+
         }
 
         private void btn_startgame_Click(object sender, EventArgs e)
