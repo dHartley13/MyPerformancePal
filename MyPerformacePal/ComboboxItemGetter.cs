@@ -7,8 +7,16 @@ using System.Data.SqlClient;
 
 namespace MyPerformacePal
 {
-    class ComboBoxItemGetter
+    //Interface
+    public interface IComboBoxItemGetter
     {
+        List<string> RetrieveCategories();
+        List<string> RetrieveSetPieces(int coordinatesX, int coordinatesY);
+    }
+
+    class ComboBoxItemGetter : IComboBoxItemGetter
+    { 
+
         public List<string> RetrieveCategories()
         {
             List<string> items = new List<string>();
@@ -43,7 +51,7 @@ namespace MyPerformacePal
         
         }
 
-        public List<string> RetrieveSetPieces(int fieldLocationResult)
+        public List<string> RetrieveSetPieces(int coordinatesX, int coordinatesY)
         {
             List<string> items = new List<string>();
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
@@ -51,15 +59,18 @@ namespace MyPerformacePal
             {
                 try
                 {
-                    string sqlCommand = "Select [setPieceTypeDesc] from dbo.actionDropDownLookup WHERE fieldLocationID =" + fieldLocationResult;
-                    SqlCommand cmd = new SqlCommand(sqlCommand, dbconnection);
+                    
                     dbconnection.Open();
+                    var sqlCommand = new SqlCommand("[dbo].[getSetPieceOptionsbyRegion]", dbconnection);
+                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatesX));
+                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", coordinatesY));
 
-                    using (var cmboDataReader = cmd.ExecuteReader())
+                    using (var cmboDataReader = sqlCommand.ExecuteReader())
                     {
                         while (cmboDataReader.Read())
                         {
-                            items.Add(cmboDataReader["setPieceTypeDesc"].ToString()); //I want to pass the ID so it becomes easier to pass back to the DB when saving an action
+                            items.Add(cmboDataReader["[setPieceTypeName]"].ToString()); //I want to pass the ID so it becomes easier to pass back to the DB when saving an action
                         }
                     }
                     return items;

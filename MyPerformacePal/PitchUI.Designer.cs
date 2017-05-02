@@ -35,6 +35,7 @@ namespace MyPerformacePal
             this.Img_Pitch = new System.Windows.Forms.PictureBox();
             this.cmbo_PresentActionChoices = new System.Windows.Forms.ComboBox();
             this.btn_startgame = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.Img_Pitch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +47,6 @@ namespace MyPerformacePal
             this.Img_Pitch.Size = new System.Drawing.Size(917, 546);
             this.Img_Pitch.TabIndex = 0;
             this.Img_Pitch.TabStop = false;
-            this.Img_Pitch.Click += new System.EventHandler(this.Img_Pitch_Click);
             this.Img_Pitch.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Img_Pitch_MouseDown);
             // 
             // cmbo_PresentActionChoices
@@ -68,11 +68,20 @@ namespace MyPerformacePal
             this.btn_startgame.UseVisualStyleBackColor = true;
             this.btn_startgame.Click += new System.EventHandler(this.btn_startgame_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(936, 174);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(178, 21);
+            this.comboBox1.TabIndex = 3;
+            // 
             // Pitch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 573);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btn_startgame);
             this.Controls.Add(this.cmbo_PresentActionChoices);
             this.Controls.Add(this.Img_Pitch);
@@ -89,6 +98,7 @@ namespace MyPerformacePal
         private System.Windows.Forms.PictureBox Img_Pitch;
         private System.Windows.Forms.ComboBox cmbo_PresentActionChoices;
         private System.Windows.Forms.Button btn_startgame;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

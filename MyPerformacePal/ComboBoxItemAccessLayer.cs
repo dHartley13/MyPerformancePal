@@ -6,23 +6,34 @@ using System.Threading.Tasks;
 
 namespace MyPerformacePal
 {
-    class ComboBoxItemAccessLayer
-    {
-        private ComboBoxItemGetter comboBoxItemGetter;
 
+    public class ComboBoxItemAccessLayer
+    {
+        //Use ComboBoxItemGetter interface
+        private readonly IComboBoxItemGetter _db;
+
+        public ComboBoxItemAccessLayer(IComboBoxItemGetter db)
+        {
+            _db = db;
+        }
+
+        private ComboBoxItemGetter comboBoxItemGetter;
+       
+        //Constructor
         public ComboBoxItemAccessLayer()
         {
             comboBoxItemGetter = new ComboBoxItemGetter();
+            _db = new ComboBoxItemGetter();
         }
 
-        internal List<string> getCategories()
+        public List<string> getCategories()
         {
             return comboBoxItemGetter.RetrieveCategories();
         }
 
-        internal List<string> getSetPieceTypes()
+        public List<string> getSetPieceTypes(int coordinatesX, int coordinatesY)
         {
-            return comboBoxItemGetter.RetrieveSetPieces(fieldLocationResult); //no idea why this isn't working
+            return comboBoxItemGetter.RetrieveSetPieces(coordinatesX, coordinatesY); 
         }
     }
 }

@@ -16,11 +16,13 @@ namespace MyPerformacePal
         //Class Variables
         public int actionType;
         public string chosenAction;
-        public double coordinateX;
-        public double coordinateY;
-        private ComboBoxItemAccessLayer comboBoxItemAccessLayer;
+        public int imageWidth;
+        public int imageHeight;
+
+        private ComboBoxItemAccessLayer _comboBoxItemAccessLayer;
         private Game _game;
         private fieldLocationFinder _fieldLocationFinder;
+        
 
         //Consutructor
         public Pitch()
@@ -28,20 +30,22 @@ namespace MyPerformacePal
             InitializeComponent();
 
             //Set object Variables
-            comboBoxItemAccessLayer = new ComboBoxItemAccessLayer();
+            _comboBoxItemAccessLayer = new ComboBoxItemAccessLayer();
             _game = new Game();
             _fieldLocationFinder = new fieldLocationFinder();
+            imageWidth = Img_Pitch.Width;
+            imageHeight = Img_Pitch.Height;
 
 
             //Set ComboBox datasource
-            var categories = comboBoxItemAccessLayer.getCategories();
+            var categories = _comboBoxItemAccessLayer.getCategories();
             cmbo_PresentActionChoices.DisplayMember = " ";      //remove autoselect value on combobox
             cmbo_PresentActionChoices.ValueMember = null;       //remove autoselect value on combobox
             cmbo_PresentActionChoices.DataSource = categories;
 
-            //TODO - add select set piece combo box to UI
+            //TODO - add select set piece combo box to UI - I can't call the getSetPieceTypes method from here. I dont know the coordinates
             /*
-            var setPieces = comboBoxItemAccessLayer.getSetPieceTypes();
+            var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes();
             cmbo_PresentsetPieceTypes.DisplayMember = " ";      //remove autoselect value on combobox
             cmbo_PresentsetPieceTypes.ValueMember = null;       //remove autoselect value on combobox
             cmbo_PresentsetPieceTypes.DataSource = setPieces;
@@ -54,17 +58,6 @@ namespace MyPerformacePal
         {
 
         }
-        
-        //TODO - remove the below
-        public enum setPieceType
-        {
-            scrum = 1,
-            lineout = 2, 
-            penalty_forGoal = 3,
-            penalty_toTouch = 4,
-            TwentyTwo_dropout = 5,
-            FreeKick = 6
-        }
 
         //Private Functions
         private void Img_Pitch_MouseDown(object sender, MouseEventArgs e)
@@ -72,21 +65,8 @@ namespace MyPerformacePal
             cmbo_PresentActionChoices.Visible = true;
             cmbo_PresentActionChoices.DroppedDown = true;
 
-            //set coordinates
-            coordinateX = e.X;
-            coordinateY = e.Y;
 
-            _fieldLocationFinder.onMouseDownFindLocation(coordinateX, coordinateY);
-
-            if (_fieldLocationFinder.fieldLocationResult == 1)
-            {
-                actionType = (int)setPieceType.scrum;
-            }
-            else if (_fieldLocationFinder.fieldLocationResult == 2)
-            {
-                actionType = (int)setPieceType.lineout;
-            }
-
+            _fieldLocationFinder.onMouseDownFindLocation(e.X, e.Y, imageWidth, imageHeight);
         }
 
         private void btn_startgame_Click(object sender, EventArgs e)
