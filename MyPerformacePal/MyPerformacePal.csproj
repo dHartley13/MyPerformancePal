@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="fieldLocationFinder.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="ComboBoxItemAccessLayer.cs" />
     <Compile Include="ComboboxItemGetter.cs" />
     <Compile Include="Game.cs" />
@@ -59,19 +59,10 @@
     <Compile Include="PitchUI.Designer.cs">
       <DependentUpon>PitchUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Profile.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Profile.Designer.cs">
-      <DependentUpon>Profile.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PitchUI.resx">
       <DependentUpon>PitchUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Profile.resx">
-      <DependentUpon>Profile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

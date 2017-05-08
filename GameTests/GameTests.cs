@@ -42,14 +42,16 @@ namespace GameTests
             game.StartGame();
 
             //Execute
-            game.RecordAction(1, "Retained");
+            game.RecordAction(1, "Retained", "Scrum", 50, 50);
 
             //Test
-            mockDB.Verify(m => m.SaveAction(1, "Retained", 123), Times.Once);
+            mockDB.Verify(m => m.SaveAction(1, "Retained", 123, "Scrum", 50, 50), Times.Once);
         }
 
+
         [Fact]
-        public void When_MouseisClicked_setPieceTypesRetreivedFromDatabase_CalledOnce()
+
+        public void When_CoordinatesPassed_setPieceTypesRetreivedFromDatabase_CalledOnce()
         {
             //Setup
             var mockDB = new Mock<IComboBoxItemGetter>();
@@ -60,38 +62,6 @@ namespace GameTests
 
             //Test
             mockDB.Verify(m => m.RetrieveSetPieces(50, 50), Times.Once);
-        }
-
-        [Fact]
-        public void When_MouseisClicked_setPieceTypesRetreivedFromDatabase()
-        {
-            //Setup
-            var mockDB = new Mock<IComboBoxItemGetter>();
-            var comboBoxItemAccessLayer = new ComboBoxItemAccessLayer(mockDB.Object);
-
-            //Execute
-            comboBoxItemAccessLayer.getSetPieceTypes(50, 50);
-
-            //Test
-            //Assert.NotNull(list is not null);
-            //Assert.SomeCode('Scrum', 'Penalty_forGoal' etc - list of values i should see in the list given the coordinates)
-        
-        }
-
-        [Fact]
-        public void When_MouseisClicked_setPieceTypesRetreivedFromDatabase_throwsError()
-        {
-            //Setup
-            var mockDB = new Mock<IComboBoxItemGetter>();
-            var comboBoxItemAccessLayer = new ComboBoxItemAccessLayer(mockDB.Object);
-
-            //Execute
-            
-
-            //Test
-            //Assert.Throws<InvalidOperationException>(
-            //    () => comboBoxItemAccessLayer.getSetPieceTypes(1, "Throws Error"));
-
         }
 
         [Fact]
@@ -109,7 +79,7 @@ namespace GameTests
 
             //Test
             Assert.Throws<InvalidOperationException>(
-                () => game.RecordAction(1, "Throws Error"));
+                () => game.RecordAction(1, "Throws Error", "no set piece",0, 0));
         }
 
 
@@ -126,7 +96,7 @@ namespace GameTests
             game.StartGame();
 
             //Execute
-            game.RecordAction(1, "Action");
+            game.RecordAction(1, "Retained", "Scrum", 50, 50);
             var stats = game.GetStats();
 
             //Test
@@ -147,8 +117,8 @@ namespace GameTests
             game.StartGame();
 
             //Execute
-            game.RecordAction(1, "Action");
-            game.RecordAction(1, "Action");
+            game.RecordAction(1, "Retained", "Scrum", 50, 50);
+            game.RecordAction(1, "Retained", "Scrum", 50, 50);
             var stats = game.GetStats();
 
             //Test

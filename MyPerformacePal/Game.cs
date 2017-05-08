@@ -36,7 +36,7 @@ namespace MyPerformacePal
             _stats = new Dictionary<int, int>();
         }
 
-        public void RecordAction(int actionType, string chosenAction)
+        public void RecordAction(int actionType, string chosenAction, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
         {
 
             if (GameId == 0)
@@ -45,7 +45,7 @@ namespace MyPerformacePal
             }
             else
             {
-                _db.SaveAction(actionType, chosenAction, GameId);
+                _db.SaveAction(actionType, chosenAction, GameId, chosenSetPiece, coordinatesX, coordinatesY);
                 RecordStats(actionType);
             }
 

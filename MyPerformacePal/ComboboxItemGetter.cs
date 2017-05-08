@@ -11,7 +11,7 @@ namespace MyPerformacePal
     public interface IComboBoxItemGetter
     {
         List<string> RetrieveCategories();
-        List<string> RetrieveSetPieces(int coordinatesX, int coordinatesY);
+        List<string> RetrieveSetPieces(decimal coordinatesX, decimal coordinatesY);
     }
 
     class ComboBoxItemGetter : IComboBoxItemGetter
@@ -38,9 +38,8 @@ namespace MyPerformacePal
                     }
                     return items;
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    Console.WriteLine(ex);
                     return items; 
                 }
                 finally
@@ -51,7 +50,7 @@ namespace MyPerformacePal
         
         }
 
-        public List<string> RetrieveSetPieces(int coordinatesX, int coordinatesY)
+        public List<string> RetrieveSetPieces(decimal coordinatesX, decimal coordinatesY)
         {
             List<string> items = new List<string>();
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
@@ -70,14 +69,13 @@ namespace MyPerformacePal
                     {
                         while (cmboDataReader.Read())
                         {
-                            items.Add(cmboDataReader["[setPieceTypeName]"].ToString()); //I want to pass the ID so it becomes easier to pass back to the DB when saving an action
+                            items.Add(cmboDataReader["[setPieceTypeName]"].ToString()); 
                         }
                     }
                     return items;
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    Console.WriteLine(ex);
                     return items;
                 }
                 finally

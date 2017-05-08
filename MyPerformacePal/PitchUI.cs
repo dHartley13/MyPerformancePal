@@ -16,42 +16,33 @@ namespace MyPerformacePal
         //Class Variables
         public int actionType;
         public string chosenAction;
+        public string chosenSetPiece;
         public int imageWidth;
         public int imageHeight;
+        public decimal coordinatesX;
+        public decimal coordinatesY;
 
         private ComboBoxItemAccessLayer _comboBoxItemAccessLayer;
         private Game _game;
-        private fieldLocationFinder _fieldLocationFinder;
+        private Helper _helper;
         
 
         //Consutructor
-        public Pitch()
+        public Pitch(IHelper _helper)
         {
             InitializeComponent();
 
             //Set object Variables
             _comboBoxItemAccessLayer = new ComboBoxItemAccessLayer();
             _game = new Game();
-            _fieldLocationFinder = new fieldLocationFinder();
-            imageWidth = Img_Pitch.Width;
-            imageHeight = Img_Pitch.Height;
+            _helper = new Helper();
 
 
-            //Set ComboBox datasource
+            //Set Categories ComboBox datasource
             var categories = _comboBoxItemAccessLayer.getCategories();
             cmbo_PresentActionChoices.DisplayMember = " ";      //remove autoselect value on combobox
             cmbo_PresentActionChoices.ValueMember = null;       //remove autoselect value on combobox
             cmbo_PresentActionChoices.DataSource = categories;
-
-            //TODO - add select set piece combo box to UI - I can't call the getSetPieceTypes method from here. I dont know the coordinates
-            /*
-            var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes();
-            cmbo_PresentsetPieceTypes.DisplayMember = " ";      //remove autoselect value on combobox
-            cmbo_PresentsetPieceTypes.ValueMember = null;       //remove autoselect value on combobox
-            cmbo_PresentsetPieceTypes.DataSource = setPieces;
-            */
-
-
         }
 
         private void PitchUI_Load(object sender, EventArgs e)
@@ -61,12 +52,28 @@ namespace MyPerformacePal
 
         //Private Functions
         private void Img_Pitch_MouseDown(object sender, MouseEventArgs e)
+        {   
+
+            coordinatesX = _helper.getXCoordinatePercentages(e.X, Img_Pitch.Width);
+            coordinatesY = _helper.getYCoordinatePercentages(e.Y, Img_Pitch.Height);
+
+            var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes(coordinatesX, coordinatesY);
+            cmbo_PresentsetPieceTypes.DisplayMember = " ";      //remove autoselect value on combobox
+            cmbo_PresentsetPieceTypes.ValueMember = null;       //remove autoselect value on combobox
+            cmbo_PresentsetPieceTypes.DataSource = setPieces;
+  
+        }
+
+
+        public void cmbo_PresentsetPieceTypes(object sender, EventArgs e)
         {
+
+            chosenSetPiece = cmbo_PresentsetPieceTypes.SelectedItem.ToString();
+
+
+            //drop down action choices once set piece selected
             cmbo_PresentActionChoices.Visible = true;
             cmbo_PresentActionChoices.DroppedDown = true;
-
-
-            _fieldLocationFinder.onMouseDownFindLocation(e.X, e.Y, imageWidth, imageHeight);
         }
 
         private void btn_startgame_Click(object sender, EventArgs e)
@@ -81,7 +88,7 @@ namespace MyPerformacePal
             try
             {
                 chosenAction = cmbo_PresentActionChoices.SelectedItem.ToString();
-                _game.RecordAction(actionType, chosenAction);
+                _game.RecordAction(actionType, chosenAction, chosenSetPiece, coordinatesX, coordinatesY);
             }
             catch (Exception ex)
             {

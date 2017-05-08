@@ -10,11 +10,11 @@ namespace MyPerformacePal
     public class ComboBoxItemAccessLayer
     {
         //Use ComboBoxItemGetter interface
-        private readonly IComboBoxItemGetter _db;
+        private readonly IComboBoxItemGetter _comboBoxItemGetter;
 
         public ComboBoxItemAccessLayer(IComboBoxItemGetter db)
         {
-            _db = db;
+            _comboBoxItemGetter = db;
         }
 
         private ComboBoxItemGetter comboBoxItemGetter;
@@ -23,7 +23,7 @@ namespace MyPerformacePal
         public ComboBoxItemAccessLayer()
         {
             comboBoxItemGetter = new ComboBoxItemGetter();
-            _db = new ComboBoxItemGetter();
+            _comboBoxItemGetter = new ComboBoxItemGetter();
         }
 
         public List<string> getCategories()
@@ -31,7 +31,7 @@ namespace MyPerformacePal
             return comboBoxItemGetter.RetrieveCategories();
         }
 
-        public List<string> getSetPieceTypes(int coordinatesX, int coordinatesY)
+        public List<string> getSetPieceTypes(decimal coordinatesX, decimal coordinatesY)
         {
             return comboBoxItemGetter.RetrieveSetPieces(coordinatesX, coordinatesY); 
         }

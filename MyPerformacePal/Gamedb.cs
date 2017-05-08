@@ -11,7 +11,7 @@ namespace MyPerformacePal
     public interface IGameDb
     {
         int CreateGame();
-        void SaveAction(int actionTypeValue, string actionChoice, int gameID);
+        void SaveAction(int actionTypeValue, string actionChoice, int gameID, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY);
     }
 
     class Gamedb : IGameDb
@@ -34,11 +34,10 @@ namespace MyPerformacePal
                 sqlCommand.Parameters.Add(returnParam);
                 try
                 {
-                    sqlCommand.ExecuteNonQuery();                                   //execute the query
-                    Console.WriteLine("dbo.getNextGameID was successfull");         //post that its been successful
+                    sqlCommand.ExecuteNonQuery();                                   //execute the query      
                     return (int)returnParam.Value;                                  //return the gameID from the SP                    
                 }
-                catch (Exception ex)
+                catch 
                 {
                     return -1;
                     throw new InvalidOperationException("Couldn't start the game");   
@@ -51,7 +50,7 @@ namespace MyPerformacePal
         }
 
 
-        public void SaveAction(int actionType, string chosenAction, int gameID)
+        public void SaveAction(int actionType, string chosenAction, int gameID, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
         {
 
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
@@ -63,15 +62,13 @@ namespace MyPerformacePal
                 sqlCommand.Parameters.Add(new SqlParameter("@gameID", gameID));
                 sqlCommand.Parameters.Add(new SqlParameter("@ActionType", actionType));
                 sqlCommand.Parameters.Add(new SqlParameter("@chosenAction", chosenAction));
+                sqlCommand.Parameters.Add(new SqlParameter("@chosenSetPiece", chosenSetPiece));
+                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatesX));
+                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatesY));
 
                 try
                 {
-                    sqlCommand.ExecuteNonQuery();                                   //execute the query
-                    Console.WriteLine("dbo.insertRawGameData Insert successfull");                        //post that its been successful               
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("dbo.insertRawGameData was not ran successfully" + ": " + ex.Message);
+                    sqlCommand.ExecuteNonQuery();                                                                  
                 }
                 finally
                 {
