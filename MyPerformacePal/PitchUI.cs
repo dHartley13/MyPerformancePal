@@ -28,9 +28,10 @@ namespace MyPerformacePal
         
 
         //Consutructor
-        public Pitch(IHelper _helper)
+        public Pitch()
         {
             InitializeComponent();
+            
 
             //Set object Variables
             _comboBoxItemAccessLayer = new ComboBoxItemAccessLayer();
@@ -57,18 +58,24 @@ namespace MyPerformacePal
             coordinatesX = _helper.getXCoordinatePercentages(e.X, Img_Pitch.Width);
             coordinatesY = _helper.getYCoordinatePercentages(e.Y, Img_Pitch.Height);
 
+            Console.WriteLine(coordinatesX.ToString());
+            Console.WriteLine(coordinatesX.ToString());
+
             var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes(coordinatesX, coordinatesY);
-            cmbo_PresentsetPieceTypes.DisplayMember = " ";      //remove autoselect value on combobox
-            cmbo_PresentsetPieceTypes.ValueMember = null;       //remove autoselect value on combobox
-            cmbo_PresentsetPieceTypes.DataSource = setPieces;
-  
+            cmbo_PresentsetPieceType.DisplayMember = " ";      //remove autoselect value on combobox
+            cmbo_PresentsetPieceType.ValueMember = null;       //remove autoselect value on combobox
+            cmbo_PresentsetPieceType.DataSource = setPieces;
+
+            cmbo_PresentActionChoices.Visible = true;
+            cmbo_PresentsetPieceType.DroppedDown = true;
+
         }
 
 
         public void cmbo_PresentsetPieceTypes(object sender, EventArgs e)
         {
 
-            chosenSetPiece = cmbo_PresentsetPieceTypes.SelectedItem.ToString();
+            chosenSetPiece = cmbo_PresentsetPieceType.SelectedItem.ToString();
 
 
             //drop down action choices once set piece selected

@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyPerformacePal
 {
-    //Interface
-    public interface IHelper
-    {
-        decimal getXCoordinatePercentages(int coordinatesX, int imageWidth);
-        decimal getYCoordinatePercentages(int coordinatesY, int imageHeight);
-    }
 
-    public class Helper : IHelper
+    public class Helper 
     {
         //Object Variables
 

@@ -48,42 +48,6 @@ namespace GameTests
             mockDB.Verify(m => m.SaveAction(1, "Retained", 123, "Scrum", 50, 50), Times.Once);
         }
 
-
-        [Fact]
-
-        public void When_CoordinatesPassed_setPieceTypesRetreivedFromDatabase_CalledOnce()
-        {
-            //Setup
-            var mockDB = new Mock<IComboBoxItemGetter>();
-            var comboBoxItemAccessLayer = new ComboBoxItemAccessLayer(mockDB.Object);
-
-            //Execute
-            comboBoxItemAccessLayer.getSetPieceTypes(50, 50);
-
-            //Test
-            mockDB.Verify(m => m.RetrieveSetPieces(50, 50), Times.Once);
-        }
-
-        [Fact]
-        public void When_GameIsNotStarted_And_ActionIsSaved_ThrowsException()
-        {
-            //Setup
-            var mockDB = new Mock<IGameDb>();
-            mockDB.Setup(m => m.CreateGame())
-                .Returns(123);
-
-            var game = new Game(mockDB.Object);
-
-            //Execute
-
-
-            //Test
-            Assert.Throws<InvalidOperationException>(
-                () => game.RecordAction(1, "Throws Error", "no set piece",0, 0));
-        }
-
-
-
         [Fact]
         public void When_FirstActionIsSaved_StatsAreUpdated()
         {
