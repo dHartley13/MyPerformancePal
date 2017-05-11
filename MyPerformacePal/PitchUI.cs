@@ -19,19 +19,19 @@ namespace MyPerformacePal
         public string chosenSetPiece;
         public int imageWidth;
         public int imageHeight;
-        public decimal coordinatesX;
-        public decimal coordinatesY;
+        object coordinatePercentages;
 
         private ComboBoxItemAccessLayer _comboBoxItemAccessLayer;
         private Game _game;
         private Helper _helper;
+
         
 
         //Consutructor
         public Pitch()
         {
             InitializeComponent();
-            
+
 
             //Set object Variables
             _comboBoxItemAccessLayer = new ComboBoxItemAccessLayer();
@@ -53,15 +53,12 @@ namespace MyPerformacePal
 
         //Private Functions
         private void Img_Pitch_MouseDown(object sender, MouseEventArgs e)
-        {   
+        {
 
-            coordinatesX = _helper.getXCoordinatePercentages(e.X, Img_Pitch.Width);
-            coordinatesY = _helper.getYCoordinatePercentages(e.Y, Img_Pitch.Height);
+            coordinatePercentages = _helper.GetPercentage(e.Y, Img_Pitch.Height, e.X, Img_Pitch.Width);
 
-            Console.WriteLine(coordinatesX.ToString());
-            Console.WriteLine(coordinatesX.ToString());
 
-            var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes(coordinatesX, coordinatesY);
+            var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes(coordinatePercentages);
             cmbo_PresentsetPieceType.DisplayMember = " ";      //remove autoselect value on combobox
             cmbo_PresentsetPieceType.ValueMember = null;       //remove autoselect value on combobox
             cmbo_PresentsetPieceType.DataSource = setPieces;
