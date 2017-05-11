@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 namespace MyPerformacePal
 {
 
-    public class Helper 
+    public interface IHelper
+    {
+        TheModel GetPercentage(int coordinatesY, int imageHeight, int coordinatesX, int imageWidth);
+    }
+
+    public class Helper : IHelper
     {
         //Object Variables
 
 
-        //Public functiosn
-        public decimal getXCoordinatePercentages(int coordinatesX, int imageWidth)
+        //Public functions
+        public TheModel GetPercentage(int coordinatesY, int imageHeight, int coordinatesX, int imageWidth)
         {
-            //Calculate mousedown coordinate percentages against image
-            var xRegionPercentage = (coordinatesX / imageWidth) * 100;
-
-            return xRegionPercentage;
+            var model = new TheModel();
+            model.xPercentage = (decimal)coordinatesX / imageWidth * 100;
+            model.yPercentage = (decimal)coordinatesY / imageHeight * 100;
+            return model;
         }
 
-        public decimal getYCoordinatePercentages(int coordinatesY, int imageHeight)
-        {
-            //Calculate mousedown coordinate percentages against image
-            var yRegionPercentage = (coordinatesY / imageHeight) * 100;
+        //Private Functions
 
-            return yRegionPercentage;
-        }
     }
             
 }

@@ -48,6 +48,7 @@ namespace GameTests
             mockDB.Verify(m => m.SaveAction(1, "Retained", 123, "Scrum", 50, 50), Times.Once);
         }
 
+
         [Fact]
         public void When_FirstActionIsSaved_StatsAreUpdated()
         {

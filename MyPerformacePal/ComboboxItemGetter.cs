@@ -11,7 +11,7 @@ namespace MyPerformacePal
     public interface IComboBoxItemGetter
     {
         List<string> RetrieveCategories();
-        List<string> RetrieveSetPieces(decimal coordinatesX, decimal coordinatesY);
+        List<string> RetrieveSetPieces(object coordinatePercentages);
     }
 
     class ComboBoxItemGetter : IComboBoxItemGetter
@@ -50,7 +50,7 @@ namespace MyPerformacePal
         
         }
 
-        public List<string> RetrieveSetPieces(decimal coordinatesX, decimal coordinatesY)
+        public List<string> RetrieveSetPieces(object coordinatePercentages)
         {
             List<string> items = new List<string>();
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
@@ -62,8 +62,8 @@ namespace MyPerformacePal
                     dbconnection.Open();
                     var sqlCommand = new SqlCommand("[dbo].[getSetPieceOptionsbyRegion]", dbconnection);
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatesX));
-                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", coordinatesY));
+                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatePercentages.xPercentage));
+                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", coordinatePercentages.yPercentage));
 
                     using (var cmboDataReader = sqlCommand.ExecuteReader())
                     {

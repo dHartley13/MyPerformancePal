@@ -7,33 +7,39 @@ using System.Threading.Tasks;
 namespace MyPerformacePal
 {
 
+
     public class ComboBoxItemAccessLayer
     {
-        //Use ComboBoxItemGetter interface
+        //class variables 
+
+
+        //Interfaces
         private readonly IComboBoxItemGetter _comboBoxItemGetter;
+        private readonly IHelper _helper;
 
-        public ComboBoxItemAccessLayer(IComboBoxItemGetter db)
-        {
-            _comboBoxItemGetter = db;
-        }
 
-        private ComboBoxItemGetter comboBoxItemGetter;
-       
         //Constructor
-        public ComboBoxItemAccessLayer()
+        public ComboBoxItemAccessLayer(IHelper helper, IComboBoxItemGetter comboBoxItemGetter)
         {
-            comboBoxItemGetter = new ComboBoxItemGetter();
             _comboBoxItemGetter = new ComboBoxItemGetter();
+            _helper = new Helper();
         }
 
+
+        //Public functions
         public List<string> getCategories()
         {
-            return comboBoxItemGetter.RetrieveCategories();
+            return _comboBoxItemGetter.RetrieveCategories();
         }
 
-        public List<string> getSetPieceTypes(decimal coordinatesX, decimal coordinatesY)
+        public List<string> getSetPieceTypes(object coordinatePercentages)
         {
-            return comboBoxItemGetter.RetrieveSetPieces(coordinatesX, coordinatesY); 
+            return _comboBoxItemGetter.RetrieveSetPieces(coordinatePercentages); 
         }
+
+        //Private functions
+
+
+
     }
 }
