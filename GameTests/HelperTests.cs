@@ -14,17 +14,31 @@ namespace GameTests
     class HelperTests
     {
         [Fact]
-        public void When_coordinatesGvien_Perrcentagesreturned_fromHelper()
+        public void When_coordinatesGvien_XPerrcentagesreturned_fromHelper()
         {
             //Setup
             var helper = new Helper();
 
             //Execute
-            var result = helper.GetPercentage(100, 200, 20, 100);
+            var result = helper.getXCoordinatePercentages(100, 200);
 
             //Test
-            Assert.Equal(50, result.yPercentage);
-            Assert.Equal(20, result.xPercentage);
+            Assert.Equal(50, result);
+            
+        }
+    
+
+        [Fact]
+        public void When_coordinatesGvien_YPerrcentagesreturned_fromHelper()
+        {
+            //Setup
+            var helper = new Helper();
+
+            //Execute
+            var result = helper.getYCoordinatePercentages(20, 80);
+
+            //Test
+            Assert.Equal(40, result);
         }
     }
 }

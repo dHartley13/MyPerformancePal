@@ -19,7 +19,8 @@ namespace MyPerformacePal
         public string chosenSetPiece;
         public int imageWidth;
         public int imageHeight;
-        object coordinatePercentages;
+        decimal coordinatesX;
+        decimal coordinatesY;
 
         private ComboBoxItemAccessLayer _comboBoxItemAccessLayer;
         private Game _game;
@@ -55,10 +56,10 @@ namespace MyPerformacePal
         private void Img_Pitch_MouseDown(object sender, MouseEventArgs e)
         {
 
-            coordinatePercentages = _helper.GetPercentage(e.Y, Img_Pitch.Height, e.X, Img_Pitch.Width);
+            coordinatesX = _helper.getXCoordinatePercentages(e.X, Img_Pitch.Width);
+            coordinatesY = _helper.getXCoordinatePercentages(e.Y, Img_Pitch.Height);
 
-
-            var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes(coordinatePercentages);
+            var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes(coordinatesX, coordinatesY);
             cmbo_PresentsetPieceType.DisplayMember = " ";      //remove autoselect value on combobox
             cmbo_PresentsetPieceType.ValueMember = null;       //remove autoselect value on combobox
             cmbo_PresentsetPieceType.DataSource = setPieces;
@@ -67,7 +68,6 @@ namespace MyPerformacePal
             cmbo_PresentsetPieceType.DroppedDown = true;
 
         }
-
 
         public void cmbo_PresentsetPieceTypes(object sender, EventArgs e)
         {

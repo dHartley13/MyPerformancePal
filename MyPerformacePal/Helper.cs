@@ -9,7 +9,8 @@ namespace MyPerformacePal
 
     public interface IHelper
     {
-        TheModel GetPercentage(int coordinatesY, int imageHeight, int coordinatesX, int imageWidth);
+        decimal getXCoordinatePercentages(int coordinatesX, int imageWidth);
+        decimal getYCoordinatePercentages(int coordinatesY, int imageHeight);
     }
 
     public class Helper : IHelper
@@ -18,12 +19,21 @@ namespace MyPerformacePal
 
 
         //Public functions
-        public TheModel GetPercentage(int coordinatesY, int imageHeight, int coordinatesX, int imageWidth)
+        //Public functiosn
+        public decimal getXCoordinatePercentages(int coordinatesX, int imageWidth)
         {
-            var model = new TheModel();
-            model.xPercentage = (decimal)coordinatesX / imageWidth * 100;
-            model.yPercentage = (decimal)coordinatesY / imageHeight * 100;
-            return model;
+            //Calculate mousedown coordinate percentages against image
+            var xRegionPercentage = (decimal) coordinatesX / imageWidth * 100;
+
+            return xRegionPercentage;
+        }
+
+        public decimal getYCoordinatePercentages(int coordinatesY, int imageHeight)
+        {
+            //Calculate mousedown coordinate percentages against image
+            var yRegionPercentage = (decimal) coordinatesY / imageHeight * 100;
+
+            return yRegionPercentage;
         }
 
         //Private Functions

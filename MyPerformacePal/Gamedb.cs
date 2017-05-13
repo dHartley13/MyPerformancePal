@@ -57,7 +57,7 @@ namespace MyPerformacePal
             using (var dbConnection = new SqlConnection(connectionString))
             {
                 dbConnection.Open();
-                var sqlCommand = new SqlCommand("dbo.insertRawGameData", dbConnection);
+                var sqlCommand = new SqlCommand("dbo.insert_RawGameData", dbConnection);
                 sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(new SqlParameter("@gameID", gameID));
                 sqlCommand.Parameters.Add(new SqlParameter("@ActionType", actionType));

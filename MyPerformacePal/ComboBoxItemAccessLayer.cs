@@ -19,7 +19,7 @@ namespace MyPerformacePal
 
 
         //Constructor
-        public ComboBoxItemAccessLayer(IHelper helper, IComboBoxItemGetter comboBoxItemGetter)
+        public ComboBoxItemAccessLayer()
         {
             _comboBoxItemGetter = new ComboBoxItemGetter();
             _helper = new Helper();
@@ -32,9 +32,9 @@ namespace MyPerformacePal
             return _comboBoxItemGetter.RetrieveCategories();
         }
 
-        public List<string> getSetPieceTypes(object coordinatePercentages)
+        public List<string> getSetPieceTypes(decimal coordinatesX, decimal coordinatesY)
         {
-            return _comboBoxItemGetter.RetrieveSetPieces(coordinatePercentages); 
+            return _comboBoxItemGetter.RetrieveSetPieces(coordinatesX, coordinatesY); 
         }
 
         //Private functions

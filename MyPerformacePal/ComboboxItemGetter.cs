@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
+using System.Windows.Forms;
+
 
 namespace MyPerformacePal
 {
@@ -11,7 +14,7 @@ namespace MyPerformacePal
     public interface IComboBoxItemGetter
     {
         List<string> RetrieveCategories();
-        List<string> RetrieveSetPieces(object coordinatePercentages);
+        List<string> RetrieveSetPieces(decimal coordinatesX, decimal coordinatesY);
     }
 
     class ComboBoxItemGetter : IComboBoxItemGetter
@@ -50,7 +53,7 @@ namespace MyPerformacePal
         
         }
 
-        public List<string> RetrieveSetPieces(object coordinatePercentages)
+        public List<string> RetrieveSetPieces(decimal coordinatesX, decimal coordinatesY)
         {
             List<string> items = new List<string>();
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
@@ -62,16 +65,21 @@ namespace MyPerformacePal
                     dbconnection.Open();
                     var sqlCommand = new SqlCommand("[dbo].[getSetPieceOptionsbyRegion]", dbconnection);
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatePercentages.xPercentage));
-                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", coordinatePercentages.yPercentage));
+                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatesX));
+                    sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", coordinatesY));
 
-                    using (var cmboDataReader = sqlCommand.ExecuteReader())
+                    sqlCommand.ExecuteNonQuery();
+
+                    //using data adapter as executing a non query so cannot use ExecuteReader
+                    var cmboDataReader = new SqlDataAdapter(sqlCommand);
+                    var setPieceDataset = new DataSet();
+                    cmboDataReader.Fill(setPieceDataset);
+
+                    foreach (DataRow setPieceRow in setPieceDataset.Tables[0].Rows)
                     {
-                        while (cmboDataReader.Read())
-                        {
-                            items.Add(cmboDataReader["[setPieceTypeName]"].ToString()); 
-                        }
+                        items.Add(setPieceRow[0].ToString());
                     }
+
                     return items;
                 }
                 catch 
