@@ -11,34 +11,21 @@ using System.Threading.Tasks;
 
 namespace GameTests
 {
-    class HelperTests
+    public class HelperTests
     {
         [Fact]
-        public void When_coordinatesGvien_XPerrcentagesreturned_fromHelper()
+        public void When_coordinatesGvien_Perrcentagesreturned_fromHelper()
         {
             //Setup
             var helper = new Helper();
 
             //Execute
-            var result = helper.getXCoordinatePercentages(100, 200);
+            var result = helper.getCoordinatePercentages(100, 200, 20, 80);
 
             //Test
-            Assert.Equal(50, result);
+            Assert.Equal(50, result.Y);
+            Assert.Equal(25, result.X);
             
-        }
-    
-
-        [Fact]
-        public void When_coordinatesGvien_YPerrcentagesreturned_fromHelper()
-        {
-            //Setup
-            var helper = new Helper();
-
-            //Execute
-            var result = helper.getYCoordinatePercentages(20, 80);
-
-            //Test
-            Assert.Equal(40, result);
         }
     }
 }

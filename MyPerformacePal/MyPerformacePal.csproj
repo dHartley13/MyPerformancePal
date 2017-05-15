@@ -53,6 +53,7 @@
     <Compile Include="ComboboxItemGetter.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Gamedb.cs" />
+    <Compile Include="pitchLocation.cs" />
     <Compile Include="PitchUI.cs">
       <SubType>Form</SubType>
     </Compile>

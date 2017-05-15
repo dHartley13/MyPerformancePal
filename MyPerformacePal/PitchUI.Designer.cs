@@ -75,6 +75,7 @@ namespace MyPerformacePal
             this.cmbo_PresentsetPieceType.Name = "cmbo_PresentsetPieceType";
             this.cmbo_PresentsetPieceType.Size = new System.Drawing.Size(178, 21);
             this.cmbo_PresentsetPieceType.TabIndex = 3;
+            this.cmbo_PresentsetPieceType.SelectedIndexChanged += new System.EventHandler(this.cmbo_PresentsetPieceType_SelectedIndexChanged);
             // 
             // Pitch
             // 

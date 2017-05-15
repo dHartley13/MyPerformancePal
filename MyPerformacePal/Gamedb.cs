@@ -11,7 +11,7 @@ namespace MyPerformacePal
     public interface IGameDb
     {
         int CreateGame();
-        void SaveAction(int actionTypeValue, string actionChoice, int gameID, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY);
+        void SaveAction(string actionChoice, int gameID, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY);
     }
 
     class Gamedb : IGameDb
@@ -50,7 +50,7 @@ namespace MyPerformacePal
         }
 
 
-        public void SaveAction(int actionType, string chosenAction, int gameID, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
+        public void SaveAction(string chosenAction, int gameID, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
         {
 
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
@@ -60,11 +60,11 @@ namespace MyPerformacePal
                 var sqlCommand = new SqlCommand("dbo.insert_RawGameData", dbConnection);
                 sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(new SqlParameter("@gameID", gameID));
-                sqlCommand.Parameters.Add(new SqlParameter("@ActionType", actionType));
                 sqlCommand.Parameters.Add(new SqlParameter("@chosenAction", chosenAction));
                 sqlCommand.Parameters.Add(new SqlParameter("@chosenSetPiece", chosenSetPiece));
                 sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatesX));
-                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatesY));
+                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", coordinatesY));
+                
 
                 try
                 {

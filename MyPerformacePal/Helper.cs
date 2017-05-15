@@ -9,8 +9,7 @@ namespace MyPerformacePal
 
     public interface IHelper
     {
-        decimal getXCoordinatePercentages(int coordinatesX, int imageWidth);
-        decimal getYCoordinatePercentages(int coordinatesY, int imageHeight);
+        pitchLocation getCoordinatePercentages(int coordinatesY, int imageHeight, int coordinatesX, int imageWidth);
     }
 
     public class Helper : IHelper
@@ -19,21 +18,17 @@ namespace MyPerformacePal
 
 
         //Public functions
-        //Public functiosn
-        public decimal getXCoordinatePercentages(int coordinatesX, int imageWidth)
+        public pitchLocation getCoordinatePercentages(int coordinatesY, int imageHeight, int coordinatesX, int imageWidth)
         {
+
+            var dto = new pitchLocation();
+            
             //Calculate mousedown coordinate percentages against image
-            var xRegionPercentage = (decimal) coordinatesX / imageWidth * 100;
+            dto.Y = (decimal)coordinatesY / imageHeight * 100;
+            dto.X = (decimal)coordinatesX / imageWidth * 100;
 
-            return xRegionPercentage;
-        }
-
-        public decimal getYCoordinatePercentages(int coordinatesY, int imageHeight)
-        {
-            //Calculate mousedown coordinate percentages against image
-            var yRegionPercentage = (decimal) coordinatesY / imageHeight * 100;
-
-            return yRegionPercentage;
+            return dto;
+ 
         }
 
         //Private Functions

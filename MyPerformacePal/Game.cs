@@ -28,6 +28,11 @@ namespace MyPerformacePal
 
         private Dictionary<int, int> _stats;
 
+        //TODO - will need to change this as well as not passing into into recordstats method anymore
+        public ReadOnlyDictionary<int, int> GetStats()
+        {
+            return new ReadOnlyDictionary<int, int>(_stats);
+        }
 
         //public functions
         public void StartGame()
@@ -36,7 +41,7 @@ namespace MyPerformacePal
             _stats = new Dictionary<int, int>();
         }
 
-        public void RecordAction(int actionType, string chosenAction, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
+        public void RecordAction(string chosenAction, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
         {
 
             if (GameId == 0)
@@ -45,19 +50,18 @@ namespace MyPerformacePal
             }
             else
             {
-                _db.SaveAction(actionType, chosenAction, GameId, chosenSetPiece, coordinatesX, coordinatesY);
-                RecordStats(actionType);
+                _db.SaveAction(chosenAction, GameId, chosenSetPiece, coordinatesX, coordinatesY);
+                //RecordStats(actionType);
             }
 
         }
-
-        public ReadOnlyDictionary<int, int> GetStats()
-        {
-            return new ReadOnlyDictionary<int, int>(_stats);
-        }
+       
 
 
-        //private function
+
+        //Private functions
+
+        //TODO - something different as i'm no longer passing a string *****
         private void RecordStats(int actionType)
         {
             if (_stats.ContainsKey(actionType))
@@ -65,6 +69,7 @@ namespace MyPerformacePal
             else
                 _stats.Add(actionType, 1);
         }
+
     }
 }
 
