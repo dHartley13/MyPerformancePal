@@ -43,17 +43,8 @@ namespace MyPerformacePal
 
         public void RecordAction(string chosenAction, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
         {
-
-            if (GameId == 0)
-            {
-                throw new InvalidOperationException("Cannot record an action as the game has not started");
-            }
-            else
-            {
                 _db.SaveAction(chosenAction, GameId, chosenSetPiece, coordinatesX, coordinatesY);
                 //RecordStats(actionType);
-            }
-
         }
        
 
