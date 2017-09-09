@@ -21,14 +21,14 @@ namespace MyPerformacePal
         public pitchLocation getCoordinatePercentages(int coordinatesY, int imageHeight, int coordinatesX, int imageWidth)
         {
 
-            var dto = new pitchLocation();
-            
+            var pitchLocation = new pitchLocation();
+
             //Calculate mousedown coordinate percentages against image
-            dto.Y = ((decimal)coordinatesY / imageHeight) * 100;
-            dto.X = ((decimal)coordinatesX / imageWidth) * 100;
+            pitchLocation.Y = (decimal)coordinatesY / (decimal)imageHeight *100;
+            pitchLocation.X = (decimal)coordinatesX / (decimal)imageWidth *100;
 
 
-            return dto;
+            return pitchLocation;
  
         }
 

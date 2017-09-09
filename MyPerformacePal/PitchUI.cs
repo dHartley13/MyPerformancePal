@@ -56,15 +56,17 @@ namespace MyPerformacePal
         private void Img_Pitch_MouseDown(object sender, MouseEventArgs e)
         {
             pitchPercentageLocation = _helper.getCoordinatePercentages(e.Y, Img_Pitch.Height, e.X, Img_Pitch.Width);
-            
 
-            //call access layer to get source for combobox
-            var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes(pitchPercentageLocation.X, pitchPercentageLocation.Y);
+
+
+           //call access layer to get source for combobox
+           // var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes( pitchPercentageLocation.Y);
 
             //set combodata source
+            var setPieceTypes = _comboBoxItemAccessLayer.getSetPieceTypes(pitchPercentageLocation);
             cmbo_PresentsetPieceType.DisplayMember = " ";      //remove autoselect value on combobox
             cmbo_PresentsetPieceType.ValueMember = null;       //remove autoselect value on combobox
-            cmbo_PresentsetPieceType.DataSource = setPieces;
+            cmbo_PresentsetPieceType.DataSource = setPieceTypes;
 
             //drop down set piece combo box
             cmbo_PresentsetPieceType.DroppedDown = true;

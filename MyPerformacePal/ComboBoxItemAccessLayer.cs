@@ -32,9 +32,9 @@ namespace MyPerformacePal
             return _comboBoxItemGetter.RetrieveCategories();
         }
 
-        public List<string> getSetPieceTypes(decimal coordinatesX, decimal coordinatesY)
+        public List<string> getSetPieceTypes(object pitchPercentageLocation)
         {
-            return _comboBoxItemGetter.RetrieveSetPieces(coordinatesX, coordinatesY); 
+            return _comboBoxItemGetter.RetrieveSetPieces(pitchPercentageLocation); 
         }
 
         //Private functions
