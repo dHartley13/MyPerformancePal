@@ -36,6 +36,8 @@ namespace MyPerformacePal
             this.cmbo_PresentActionChoices = new System.Windows.Forms.ComboBox();
             this.btn_startgame = new System.Windows.Forms.Button();
             this.cmbo_PresentsetPieceType = new System.Windows.Forms.ComboBox();
+            this.userNotification_pickSetPiece = new System.Windows.Forms.Label();
+            this.userNotification_selectAction = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Img_Pitch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +54,7 @@ namespace MyPerformacePal
             // cmbo_PresentActionChoices
             // 
             this.cmbo_PresentActionChoices.FormattingEnabled = true;
-            this.cmbo_PresentActionChoices.Location = new System.Drawing.Point(936, 13);
+            this.cmbo_PresentActionChoices.Location = new System.Drawing.Point(936, 211);
             this.cmbo_PresentActionChoices.Name = "cmbo_PresentActionChoices";
             this.cmbo_PresentActionChoices.Size = new System.Drawing.Size(178, 21);
             this.cmbo_PresentActionChoices.TabIndex = 1;
@@ -71,17 +73,37 @@ namespace MyPerformacePal
             // cmbo_PresentsetPieceType
             // 
             this.cmbo_PresentsetPieceType.FormattingEnabled = true;
-            this.cmbo_PresentsetPieceType.Location = new System.Drawing.Point(936, 174);
+            this.cmbo_PresentsetPieceType.Location = new System.Drawing.Point(937, 42);
             this.cmbo_PresentsetPieceType.Name = "cmbo_PresentsetPieceType";
             this.cmbo_PresentsetPieceType.Size = new System.Drawing.Size(178, 21);
             this.cmbo_PresentsetPieceType.TabIndex = 3;
             this.cmbo_PresentsetPieceType.SelectedIndexChanged += new System.EventHandler(this.cmbo_PresentsetPieceType_SelectedIndexChanged);
+            // 
+            // userNotification_pickSetPiece
+            // 
+            this.userNotification_pickSetPiece.AutoSize = true;
+            this.userNotification_pickSetPiece.Location = new System.Drawing.Point(937, 23);
+            this.userNotification_pickSetPiece.Name = "userNotification_pickSetPiece";
+            this.userNotification_pickSetPiece.Size = new System.Drawing.Size(86, 13);
+            this.userNotification_pickSetPiece.TabIndex = 4;
+            this.userNotification_pickSetPiece.Text = "Pick a set piece!";
+            // 
+            // userNotification_selectAction
+            // 
+            this.userNotification_selectAction.AutoSize = true;
+            this.userNotification_selectAction.Location = new System.Drawing.Point(937, 195);
+            this.userNotification_selectAction.Name = "userNotification_selectAction";
+            this.userNotification_selectAction.Size = new System.Drawing.Size(117, 13);
+            this.userNotification_selectAction.TabIndex = 5;
+            this.userNotification_selectAction.Text = "Select what happened!";
             // 
             // Pitch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 573);
+            this.Controls.Add(this.userNotification_selectAction);
+            this.Controls.Add(this.userNotification_pickSetPiece);
             this.Controls.Add(this.cmbo_PresentsetPieceType);
             this.Controls.Add(this.btn_startgame);
             this.Controls.Add(this.cmbo_PresentActionChoices);
@@ -91,6 +113,7 @@ namespace MyPerformacePal
             this.Load += new System.EventHandler(this.PitchUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Img_Pitch)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -100,6 +123,8 @@ namespace MyPerformacePal
         private System.Windows.Forms.ComboBox cmbo_PresentActionChoices;
         private System.Windows.Forms.Button btn_startgame;
         private System.Windows.Forms.ComboBox cmbo_PresentsetPieceType;
+        private System.Windows.Forms.Label userNotification_pickSetPiece;
+        private System.Windows.Forms.Label userNotification_selectAction;
     }
 }
 

@@ -41,9 +41,9 @@ namespace MyPerformacePal
             _stats = new Dictionary<int, int>();
         }
 
-        public void RecordAction(string chosenAction, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
+        public void RecordAction(string chosenAction, string chosenSetPiece, object pitchPercentageLocation)
         {
-                _db.SaveAction(chosenAction, GameId, chosenSetPiece, coordinatesX, coordinatesY);
+                _db.SaveAction(chosenAction, GameId, chosenSetPiece, pitchPercentageLocation);
                 //RecordStats(actionType);
         }
        

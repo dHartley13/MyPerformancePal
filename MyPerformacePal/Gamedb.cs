@@ -11,7 +11,7 @@ namespace MyPerformacePal
     public interface IGameDb
     {
         int CreateGame();
-        void SaveAction(string actionChoice, int gameID, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY);
+        void SaveAction(string actionChoice, int gameID, string chosenSetPiece, object pitchPercentageLocation);
     }
 
     class Gamedb : IGameDb
@@ -50,7 +50,7 @@ namespace MyPerformacePal
         }
 
 
-        public void SaveAction(string chosenAction, int gameID, string chosenSetPiece, decimal coordinatesX, decimal coordinatesY)
+        public void SaveAction(string chosenAction, int gameID, string chosenSetPiece, object pitchPercentageLocation)
         {
 
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
@@ -62,8 +62,8 @@ namespace MyPerformacePal
                 sqlCommand.Parameters.Add(new SqlParameter("@gameID", gameID));
                 sqlCommand.Parameters.Add(new SqlParameter("@chosenAction", chosenAction));
                 sqlCommand.Parameters.Add(new SqlParameter("@chosenSetPiece", chosenSetPiece));
-                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", coordinatesX));
-                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", coordinatesY));
+                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", ((MyPerformacePal.pitchLocation)pitchPercentageLocation).X)); 
+                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", ((MyPerformacePal.pitchLocation)pitchPercentageLocation).Y));
                 
 
                 try
