@@ -25,6 +25,7 @@ namespace MyPerformacePal
         private Game _game;
         private Helper _helper;
         private pitchLocation _pitchLocation;
+        private bool ignoreSelectedIndexChanged;
 
 
         //Consutructor
@@ -39,12 +40,10 @@ namespace MyPerformacePal
             _helper = new Helper();
             _pitchLocation = new pitchLocation();
 
-
-            //Set Categories ComboBox datasource
-            var categories = _comboBoxItemAccessLayer.getCategories();
-            cmbo_PresentActionChoices.DisplayMember = " ";      //remove autoselect value on combobox
-            cmbo_PresentActionChoices.ValueMember = null;       //remove autoselect value on combobox
-            cmbo_PresentActionChoices.DataSource = categories;
+            cmbo_PresentActionChoices.Visible = false;
+            cmbo_PresentsetPieceType.Visible = false;
+            userNotification_pickSetPiece.Visible = false;
+            userNotification_selectAction.Visible = false;
         }
 
         private void PitchUI_Load(object sender, EventArgs e)
@@ -57,19 +56,15 @@ namespace MyPerformacePal
         {
             pitchPercentageLocation = _helper.getCoordinatePercentages(e.Y, Img_Pitch.Height, e.X, Img_Pitch.Width);
 
-
-
-           //call access layer to get source for combobox
-           // var setPieces = _comboBoxItemAccessLayer.getSetPieceTypes( pitchPercentageLocation.Y);
-
             //set combodata source
             var setPieceTypes = _comboBoxItemAccessLayer.getSetPieceTypes(pitchPercentageLocation);
-            cmbo_PresentsetPieceType.DisplayMember = " ";      //remove autoselect value on combobox
-            cmbo_PresentsetPieceType.ValueMember = null;       //remove autoselect value on combobox
+            cmbo_PresentsetPieceType.SelectedIndexChanged -= cmbo_PresentsetPieceType_SelectedIndexChanged; //unregister the event while i set my datasource (to stop it from auto selecting the first item)
             cmbo_PresentsetPieceType.DataSource = setPieceTypes;
+            cmbo_PresentsetPieceType.SelectedIndex = -1;
+            cmbo_PresentsetPieceType.SelectedIndexChanged += cmbo_PresentsetPieceType_SelectedIndexChanged; //re register event after datasource bound
 
-            //drop down set piece combo box
-            cmbo_PresentsetPieceType.DroppedDown = true;
+            cmbo_PresentsetPieceType.Visible = true;
+            userNotification_pickSetPiece.Visible = true;
         }
 
 
@@ -82,10 +77,11 @@ namespace MyPerformacePal
         //Public Functions
         public void cmbo_PresentActionChoices_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             try
             {
                 chosenAction = cmbo_PresentActionChoices.SelectedItem.ToString();
-                _game.RecordAction(chosenAction, chosenSetPiece, _pitchLocation.X, _pitchLocation.Y);
+                _game.RecordAction(chosenAction, chosenSetPiece, pitchPercentageLocation);
             }
             catch (Exception ex)
             {
@@ -99,6 +95,14 @@ namespace MyPerformacePal
         {
             chosenSetPiece = cmbo_PresentsetPieceType.SelectedItem.ToString();
             cmbo_PresentActionChoices.Visible = true;
+            userNotification_selectAction.Visible = true;
+
+            //Set Categories ComboBox datasource
+            cmbo_PresentActionChoices.SelectedIndexChanged -= cmbo_PresentActionChoices_SelectedIndexChanged; //unregister the event while i set my datasource (to stop it from auto selecting the first item)
+            var categories = _comboBoxItemAccessLayer.getCategories();  
+            cmbo_PresentActionChoices.DataSource = categories;
+            cmbo_PresentActionChoices.SelectedIndex = -1;
+            cmbo_PresentActionChoices.SelectedIndexChanged += cmbo_PresentActionChoices_SelectedIndexChanged; //re register event after datasource bound
         }
     }
 }
