@@ -42,10 +42,23 @@ namespace GameTests
             game.StartGame();
 
             //Execute
-            game.RecordAction("Retained", "Scrum", 50, 50);
+            game.RecordAction("Retained", "Scrum", 50);
 
             //Test
-            mockDB.Verify(m => m.SaveAction("Retained", 123, "Scrum", 50, 50), Times.Once);
+            mockDB.Verify(m => m.SaveAction("Retained", 123, "Scrum", 50), Times.Once);
+        }
+
+        [Fact]
+        public void When_GameHasNotStarted_NoActionsCanBeSaved()
+        {
+            //Setup
+            
+
+            //Execute
+            
+
+            //Test
+            
         }
 
 

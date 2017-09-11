@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyPerformacePal
 {
-    public class Game
+    public class Game : Pitch
     {
         //Use GameDb interface
         private readonly IGameDb _db;
@@ -43,8 +43,15 @@ namespace MyPerformacePal
 
         public void RecordAction(string chosenAction, string chosenSetPiece, object pitchPercentageLocation)
         {
+            if (GameId == 0)
+            {
+                throw new InvalidOperationException("Cannot record an action as the game has not started");
+            }
+            else
+            {
                 _db.SaveAction(chosenAction, GameId, chosenSetPiece, pitchPercentageLocation);
                 //RecordStats(actionType);
+            }
         }
        
 
