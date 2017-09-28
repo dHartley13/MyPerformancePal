@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyPerformacePal
 {
-    public class Game : Pitch
+    public class Game 
     {
         //Use GameDb interface
         private readonly IGameDb _db;

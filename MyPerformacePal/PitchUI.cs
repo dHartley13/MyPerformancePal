@@ -74,6 +74,7 @@ namespace MyPerformacePal
 
             //make next combobox visible
             cmbo_PresentsetPieceType.Visible = true;
+            cmbo_PresentsetPieceType.DroppedDown = true;
             userNotification_pickSetPiece.Visible = true;
         }
 
@@ -95,34 +96,55 @@ namespace MyPerformacePal
             btn_submitRecord.Visible = true;
         }
 
-        //Private Functions 
-        private void cmbo_PresentsetPieceType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            chosenSetPiece = cmbo_PresentsetPieceType.SelectedItem.ToString();
-            cmbo_PresentActionChoices.Visible = true;
-            userNotification_selectAction.Visible = true;
-
-            //Set Categories ComboBox datasource
-            cmbo_PresentActionChoices.SelectedIndexChanged -= cmbo_PresentActionChoices_SelectedIndexChanged; //unregister the event while i set my datasource (to stop it from auto selecting the first item)
-            var categories = _comboBoxItemAccessLayer.getCategories();  
-            cmbo_PresentActionChoices.DataSource = categories;
-            cmbo_PresentActionChoices.SelectedIndex = -1;
-            cmbo_PresentActionChoices.SelectedIndexChanged += cmbo_PresentActionChoices_SelectedIndexChanged; //re register event after datasource bound
-        }
-
         public void btn_submitRecord_Click(object sender, EventArgs e)
         {
             try
             {
                 _game.RecordAction(chosenAction, chosenSetPiece, pitchPercentageLocation);
-                cmbo_PresentsetPieceType.Text = "";
-                cmbo_PresentActionChoices.Text = "";
+                resetSelections();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error when calling RecordAction:" + ex);
                 MessageBox.Show(ex.ToString());
+                resetSelections();
             }
         }
+
+        //Private Functions 
+        private void cmbo_PresentsetPieceType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+    
+                chosenSetPiece = cmbo_PresentsetPieceType.SelectedItem.ToString();
+                cmbo_PresentActionChoices.Visible = true;
+                cmbo_PresentActionChoices.DroppedDown = true;
+                userNotification_selectAction.Visible = true;
+
+
+                //Set Categories ComboBox datasource
+                cmbo_PresentActionChoices.SelectedIndexChanged -= cmbo_PresentActionChoices_SelectedIndexChanged; //unregister the event while i set my datasource (to stop it from auto selecting the first item)
+                var categories = _comboBoxItemAccessLayer.getCategories();
+                cmbo_PresentActionChoices.DataSource = categories;
+                cmbo_PresentActionChoices.SelectedIndex = -1;
+                cmbo_PresentActionChoices.SelectedIndexChanged += cmbo_PresentActionChoices_SelectedIndexChanged; //re register event after datasource bound
+            
+        }
+
+        private void resetSelections()
+        {
+            chosenAction = null;
+            chosenSetPiece = null;
+            pitchPercentageLocation = null;
+
+            cmbo_PresentActionChoices.SelectedItem = -1;
+            cmbo_PresentActionChoices.Text = "";
+
+
+            cmbo_PresentsetPieceType.SelectedItem = -1;
+            cmbo_PresentsetPieceType.Text = "";
+            cmbo_PresentsetPieceType.DroppedDown = false;
+
+        }
+        
     }
 }
