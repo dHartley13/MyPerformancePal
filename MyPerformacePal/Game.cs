@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyPerformacePal
 {
-    class Game
+    public class Game 
     {
         //Use GameDb interface
         private readonly IGameDb _db;
@@ -28,6 +28,11 @@ namespace MyPerformacePal
 
         private Dictionary<int, int> _stats;
 
+        //TODO - will need to change this as well as not passing into into recordstats method anymore
+        public ReadOnlyDictionary<int, int> GetStats()
+        {
+            return new ReadOnlyDictionary<int, int>(_stats);
+        }
 
         //public functions
         public void StartGame()
@@ -36,24 +41,25 @@ namespace MyPerformacePal
             _stats = new Dictionary<int, int>();
         }
 
-        public void RecordAction(int actionType, string chosenAction)
+        public void RecordAction(string chosenAction, string chosenSetPiece, object pitchPercentageLocation)
         {
-            
             if (GameId == 0)
+            {
                 throw new InvalidOperationException("Cannot record an action as the game has not started");
-
-                    _db.SaveAction(actionType, chosenAction, GameId);
-                    RecordStats(actionType);
-
+            }
+            else
+            {
+                _db.SaveAction(chosenAction, GameId, chosenSetPiece, pitchPercentageLocation);
+                //RecordStats(actionType);
+            }
         }
-
-        public ReadOnlyDictionary<int, int> GetStats()
-        {
-            return new ReadOnlyDictionary<int, int>(_stats);
-        }
+       
 
 
-        //private function
+
+        //Private functions
+
+        //TODO - something different as i'm no longer passing a string *****
         private void RecordStats(int actionType)
         {
             if (_stats.ContainsKey(actionType))
@@ -61,6 +67,7 @@ namespace MyPerformacePal
             else
                 _stats.Add(actionType, 1);
         }
+
     }
 }
 

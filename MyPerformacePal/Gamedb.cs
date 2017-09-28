@@ -11,7 +11,7 @@ namespace MyPerformacePal
     public interface IGameDb
     {
         int CreateGame();
-        void SaveAction(int actionTypeValue, string actionChoice, int gameID);
+        void SaveAction(string actionChoice, int gameID, string chosenSetPiece, object pitchPercentageLocation);
     }
 
     class Gamedb : IGameDb
@@ -19,7 +19,7 @@ namespace MyPerformacePal
         //Public functions
         public int CreateGame()
         {
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
             using (var dbConnection = new SqlConnection(connectionString))
             {
                 dbConnection.Open();
@@ -34,14 +34,13 @@ namespace MyPerformacePal
                 sqlCommand.Parameters.Add(returnParam);
                 try
                 {
-                    sqlCommand.ExecuteNonQuery();                                   //execute the query
-                    Console.WriteLine("Insert successfull");                        //post that its been successful
+                    sqlCommand.ExecuteNonQuery();                                   //execute the query      
                     return (int)returnParam.Value;                                  //return the gameID from the SP                    
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    Console.WriteLine("Insert SP was not ran successfully" + ": " + ex.Message);
                     return -1;
+                    throw new InvalidOperationException("Couldn't start the game");   
                 }
                 finally
                 {
@@ -51,27 +50,25 @@ namespace MyPerformacePal
         }
 
 
-        public void SaveAction(int actionType, string chosenAction, int gameID)
+        public void SaveAction(string chosenAction, int gameID, string chosenSetPiece, object pitchPercentageLocation)
         {
 
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPerformancePal;Integrated Security=True";
             using (var dbConnection = new SqlConnection(connectionString))
             {
                 dbConnection.Open();
-                var sqlCommand = new SqlCommand("dbo.insertRawGameData", dbConnection);
+                var sqlCommand = new SqlCommand("dbo.insert_RawGameData", dbConnection);
                 sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(new SqlParameter("@gameID", gameID));
-                sqlCommand.Parameters.Add(new SqlParameter("@ActionType", actionType));
-                sqlCommand.Parameters.Add(new SqlParameter("@Action", chosenAction));
+                sqlCommand.Parameters.Add(new SqlParameter("@chosenAction", chosenAction));
+                sqlCommand.Parameters.Add(new SqlParameter("@chosenSetPiece", chosenSetPiece));
+                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesX", ((MyPerformacePal.pitchLocation)pitchPercentageLocation).X)); 
+                sqlCommand.Parameters.Add(new SqlParameter("@coordinatesY", ((MyPerformacePal.pitchLocation)pitchPercentageLocation).Y));
+                
 
                 try
                 {
-                    sqlCommand.ExecuteNonQuery();                                   //execute the query
-                    Console.WriteLine("Insert successfull");                        //post that its been successful               
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Insert SP was not ran successfully" + ": " + ex.Message);
+                    sqlCommand.ExecuteNonQuery();                                                                  
                 }
                 finally
                 {

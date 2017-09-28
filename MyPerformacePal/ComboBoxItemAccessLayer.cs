@@ -6,18 +6,40 @@ using System.Threading.Tasks;
 
 namespace MyPerformacePal
 {
-    class ComboBoxItemAccessLayer
-    {
-        private ComboBoxItemGetter comboBoxItemGetter;
 
+
+    public class ComboBoxItemAccessLayer
+    {
+        //class variables 
+
+
+        //Interfaces
+        private readonly IComboBoxItemGetter _comboBoxItemGetter;
+        private readonly IHelper _helper;
+
+
+        //Constructor
         public ComboBoxItemAccessLayer()
         {
-            comboBoxItemGetter = new ComboBoxItemGetter();
+            _comboBoxItemGetter = new ComboBoxItemGetter();
+            _helper = new Helper();
         }
 
-        internal List<string> getCategories()
+
+        //Public functions
+        public List<string> getCategories()
         {
-            return comboBoxItemGetter.RetrieveCategories();
+            return _comboBoxItemGetter.RetrieveCategories();
         }
+
+        public List<string> getSetPieceTypes(object pitchPercentageLocation)
+        {
+            return _comboBoxItemGetter.RetrieveSetPieces(pitchPercentageLocation); 
+        }
+
+        //Private functions
+
+
+
     }
 }
