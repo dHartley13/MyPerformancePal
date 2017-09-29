@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataExporter.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ComboBoxItemAccessLayer.cs" />
     <Compile Include="ComboboxItemGetter.cs" />
